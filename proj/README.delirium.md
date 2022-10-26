@@ -19,4 +19,13 @@ sig.matrix <- arrange(sig.matrix, desc(logFC), P.Value)
 
 write.table(x = sig.matrix, file = "GSE163943.sig.matrix.txt", sep = "\t", quote = FALSE, row.names = TRUE, col.names = TRUE)
 
+library(tidyverse)
+library(tidyr)
+sig.matrix$NAME <- str_extract(rownames(sig.matrix), "[|].*[|]")
+sig.matrix$NAME <- gsub("[|]", "", sig.matrix$NAME)
+```
+
+heatmap
+```
+
 ```
