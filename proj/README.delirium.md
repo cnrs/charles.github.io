@@ -70,6 +70,12 @@ ggsave(filename = paste("GSE163943.DEG", "heatmap.pdf", sep = "."), plot = p, wi
 
 3. 火山图
 ```
+suppressPackageStartupMessages({
+	source("/usr/local/prog/scripts/plotThemes.R")
+	source("/usr/local/prog/scripts/readmatrixkits.R")
+	source("/usr/local/prog/scripts/enrichmentkits.R")
+})
+
 matrix <- read.table(file = "GSE163943.protein_coding.txt", row.names = 1, header = T)
 metasheet <- read.table(file = "metasheet.txt", row.names = NULL, header = T)
 metasheet <- metasheet[,c("GID", "TYPE")]
