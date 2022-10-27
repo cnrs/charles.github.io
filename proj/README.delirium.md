@@ -148,27 +148,31 @@ executeVolcanoPlot (matrix = sig.matrix, output = "GSE163943.DEG", logFC_cutoff 
 
 4. boxplot
 ```
+suppressPackageStartupMessages({
+	source("/usr/local/prog/scripts/plotThemes.R")
+	source("/usr/local/prog/scripts/readmatrixkits.R")
+	source("/usr/local/prog/scripts/enrichmentkits.R")
+})
+library(tidyverse)
 
 matrix <- read.table(file = "GSE163943.protein_coding.txt", row.names = 1, header = T)
 metasheet <- read.table(file = "metasheet.txt", row.names = NULL, header = T)
 metasheet <- metasheet[,c("GID", "TYPE")]
 colnames(metasheet) <- c("ID", "GROUP")
 rownames(metasheet) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
+metasheet$ID <- rownames(metasheet)
 
 sig.matrix <- diffIimma (matrix = matrix, metasheet = metasheet, ref = "CTL", exp = "POD", logFC.cutoff = log(1.5, 2), adj.p.cutoff = 1, output = "GSE163943.DEG")
 sig.matrix <- sig.matrix[sig.matrix$P.Value <= 0.05,]
 sig.matrix <- arrange(sig.matrix, desc(logFC), P.Value)
 
-
 dat <- sig.matrix[,1:8]
 colnames(dat) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
 dat <- data.frame(dat)
-
 
 dat <- rbind(head(dat, 10), tail(dat, 10))
 rownames(dat) <- str_extract(string = rownames(dat), pattern = "[|].*[|]")
 rownames(dat) <- gsub(pattern = "[|]", replacement = "", x = rownames(dat))
 
-executeBoxPlot (matrix = dat, metasheet = metasheet, compaired = list(c("POD", "CTL")), output = "GSE163943.DEG") 
-
+executeBoxPlot (matrix = dat, metasheet = metasheet, compaired = list(c("POD", "CTL")), method = "t.test", output = "GSE163943.DEG", col.num = 5) 
 ```
