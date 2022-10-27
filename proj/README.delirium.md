@@ -67,3 +67,15 @@ h_size <- 8
 
 ggsave(filename = paste("GSE163943.DEG", "heatmap.pdf", sep = "."), plot = p, width = w_size, height = h_size, units = "cm")
 ```
+
+3. 火山图
+```
+matrix <- read.table(file = "GSE163943.protein_coding.txt", row.names = 1, header = T)
+metasheet <- read.table(file = "metasheet.txt", row.names = NULL, header = T)
+metasheet <- metasheet[,c("GID", "TYPE")]
+colnames(metasheet) <- c("ID", "GROUP")
+
+sig.matrix <- diffIimma (matrix = matrix, metasheet = metasheet, ref = "CTL", exp = "POD", logFC.cutoff = log(1.0, 2), adj.p.cutoff = 1, output = "GSE163943.DEG")
+executeVolcanoPlot (matrix = sig.matrix, output = "GSE163943.DEG", logFC_cutoff = log(1.5, 2), pvalue_cutoff = -log(0.05, 10), w_size = 5, h_size = 4.5)
+```
+
