@@ -180,8 +180,18 @@ rownames(dat) <- gsub(pattern = "[|]", replacement = "", x = rownames(dat))
 executeBoxPlot (matrix = dat, metasheet = metasheet, compaired = list(c("POD", "CTL")), method = "t.test", output = "GSE163943.DEG", col.num = 5) 
 ```
 
+5. DEG功能分析
+```
+geneset <- sig.matrix$NAME
+plotGSVAHeatmap (matrix = sig.matrix, metasheet = metasheet, ref = "POD", exp = "CTL", output = "DEG.GSVA")
 
-aging.genes
+enrichmentGeneSet(geneset = geneset, ontology = "BP", species = "human", output = paste("DEG.BP", comparisons.grp, sep = "."))
+enrichmentGeneSet(geneset = geneset, ontology = "MF", species = "human", output = paste("DEG.MF", comparisons.grp, sep = "."))
+enrichmentGeneSet(geneset = geneset, ontology = "CC", species = "human", output = paste("DEG.CC", comparisons.grp, sep = "."))
+enrichmentGeneSet(geneset = geneset, ontology = "KEGG", species = "human", output = paste("DEG.KEGG", comparisons.grp, sep = "."))
+```
+
+6. aging.genes
 ```
 aging.genes <- read.table("/home/wangk/lab/yinyibo/aging.gene.txt")
 colnames(aging.genes) <- "GENEID"
