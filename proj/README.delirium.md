@@ -190,5 +190,46 @@ aging.genes <- aging.genes$GENEID
 aging.genes.sig.matrix <- sig.matrix[sig.matrix$NAME %in% aging.genes,]
 write.table(x = aging.genes.sig.matrix, file = "GSE163943.DEG.aging.genes.POD_vs_CTL.diff_limma.significant.txt", sep = "\t", quote = FALSE, row.names = TRUE, col.names = TRUE)
 
+dat <- aging.genes.sig.matrix[,1:8]
+
+anno_col <- data.frame(row.names = metasheet$ID, GROUP = metasheet$GROUP)
+rownames(anno_col) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
+anno_col$GROUP <- factor(anno_col$GROUP)
+
+dat <- rbind(head(dat, 10), tail(dat, 10))
+rownames(dat) <- str_extract(string = rownames(dat), pattern = "[|].*[|]")
+rownames(dat) <- gsub(pattern = "[|]", replacement = "", x = rownames(dat))
+
+library(ggplot2)
+library(pheatmap)
+
+p <- pheatmap(mat = dat,
+         show_rownames = T,
+         show_colnames = T,
+         scale = "row",
+         cluster_rows = T,
+         cluster_cols = F,
+         #cutree_col = 2,
+         cutree_row = 2,
+         #gaps_row = c(4),
+         gaps_col = c(4),
+         treeheight_row = 30,
+         treeheight_col = 30,
+         color = colorRampPalette(c("navy", "white", "red"))(100),
+         border = FALSE,
+         #border_color = "white",
+         #annotation_colors = ann_colors,
+         #annotation_row = anno_row,
+         annotation_col = anno_col,
+         #cellwidth = 6,
+         #cellheight = 6,
+         fontsize = 6)
+
+#w_size <- ncol(matrix) * 0.25 + 10
+#h_size <- nrow(matrix) * 0.25 + 1
+w_size <- 7
+h_size <- 8
+
+ggsave(filename = paste("GSE163943.DEG", "AGING.heatmap.pdf", sep = "."), plot = p, width = w_size, height = h_size, units = "cm")
 ```
 
