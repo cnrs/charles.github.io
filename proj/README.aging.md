@@ -16,5 +16,4 @@ MSigDB gene sets (http://www.gsea-msigdb.org/gsea/msigdb/index.jsp) The gene set
 wget https://data.broadinstitute.org/gsea-msigdb/msigdb/release/2022.1.Hs/c5.go.bp.v2022.1.Hs.symbols.gmt
 ```
 
-GO:0007568 aging
-http://amigo.geneontology.org/amigo/term/GO:0007568
+GO:0007568 aging (http://amigo.geneontology.org/amigo/term/GO:0007568)
