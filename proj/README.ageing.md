@@ -13,6 +13,6 @@ wget https://genomics.senescence.info/genes/human_genes.zip
 
 MSigDB gene sets (http://www.gsea-msigdb.org/gsea/msigdb/index.jsp) The gene sets of "c5.go.bp.v7.5.1.symbols" was downloaded from the MSigDB database
 ```
-wget http://www.gsea-msigdb.org/gsea/msigdb/download_file.jsp\?filePath\=\/msigdb\/release\/2022.1.Hs\/c5.go.bp.v2022.1.Hs.symbols.gmt
+wget https://data.broadinstitute.org/gsea-msigdb/msigdb/release/2022.1.Hs/c5.go.bp.v2022.1.Hs.symbols.gmt
 ```
 
