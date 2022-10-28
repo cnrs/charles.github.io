@@ -25,7 +25,7 @@ library(tidyr)
 sig.matrix$NAME <- str_extract(rownames(sig.matrix), "[|].*[|]")
 sig.matrix$NAME <- gsub("[|]", "", sig.matrix$NAME)
 
-write.table(x = sig.matrix, file = "GSE163943.sig.matrix.txt", sep = "\t", quote = FALSE, row.names = TRUE, col.names = TRUE)
+write.table(x = sig.matrix, file = "GSE163943.DEG.POD_vs_CTL.diff_limma.significant.txt", sep = "\t", quote = FALSE, row.names = TRUE, col.names = TRUE)
 ```
 
 heatmap
