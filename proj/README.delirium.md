@@ -182,13 +182,15 @@ executeBoxPlot (matrix = dat, metasheet = metasheet, compaired = list(c("POD", "
 
 5. DEG功能分析
 ```
+comparisons.grp <- "POD_vs_CTL"
 geneset <- sig.matrix$NAME
-plotGSVAHeatmap (matrix = sig.matrix, metasheet = metasheet, ref = "POD", exp = "CTL", output = "DEG.GSVA")
 
 enrichmentGeneSet(geneset = geneset, ontology = "BP", species = "human", output = paste("DEG.BP", comparisons.grp, sep = "."))
 enrichmentGeneSet(geneset = geneset, ontology = "MF", species = "human", output = paste("DEG.MF", comparisons.grp, sep = "."))
 enrichmentGeneSet(geneset = geneset, ontology = "CC", species = "human", output = paste("DEG.CC", comparisons.grp, sep = "."))
 enrichmentGeneSet(geneset = geneset, ontology = "KEGG", species = "human", output = paste("DEG.KEGG", comparisons.grp, sep = "."))
+
+plotGSVAHeatmap (matrix = sig.matrix, metasheet = metasheet, ref = "POD", exp = "CTL", output = "DEG.GSVA")
 ```
 
 6. aging.genes
