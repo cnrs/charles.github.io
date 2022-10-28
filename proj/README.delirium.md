@@ -20,12 +20,12 @@ sig.matrix <- diffIimma (matrix = matrix, metasheet = metasheet, ref = "CTL", ex
 sig.matrix <- sig.matrix[sig.matrix$P.Value <= 0.05,]
 sig.matrix <- arrange(sig.matrix, desc(logFC), P.Value)
 
-write.table(x = sig.matrix, file = "GSE163943.sig.matrix.txt", sep = "\t", quote = FALSE, row.names = TRUE, col.names = TRUE)
-
 library(tidyverse)
 library(tidyr)
 sig.matrix$NAME <- str_extract(rownames(sig.matrix), "[|].*[|]")
 sig.matrix$NAME <- gsub("[|]", "", sig.matrix$NAME)
+
+write.table(x = sig.matrix, file = "GSE163943.sig.matrix.txt", sep = "\t", quote = FALSE, row.names = TRUE, col.names = TRUE)
 ```
 
 heatmap
