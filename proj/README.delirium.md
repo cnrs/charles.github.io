@@ -190,7 +190,6 @@ enrichmentGeneSet(geneset = geneset, ontology = "MF", species = "human", output 
 enrichmentGeneSet(geneset = geneset, ontology = "CC", species = "human", output = paste("DEG.CC", comparisons.grp, sep = "."))
 enrichmentGeneSet(geneset = geneset, ontology = "KEGG", species = "human", output = paste("DEG.KEGG", comparisons.grp, sep = "."))
 
-plotGSVAHeatmap (matrix = sig.matrix, metasheet = metasheet, ref = "POD", exp = "CTL", output = "DEG.GSVA")
 ```
 
 6. aging.genes
