@@ -179,3 +179,12 @@ rownames(dat) <- gsub(pattern = "[|]", replacement = "", x = rownames(dat))
 
 executeBoxPlot (matrix = dat, metasheet = metasheet, compaired = list(c("POD", "CTL")), method = "t.test", output = "GSE163943.DEG", col.num = 5) 
 ```
+
+
+aging.genes
+```
+aging.genes <- read.table("/home/wangk/lab/yinyibo/aging.gene.txt")
+colnames(aging.genes) <- "GENEID"
+
+```
+
