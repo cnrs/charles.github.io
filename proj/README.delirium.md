@@ -190,15 +190,17 @@ aging.genes <- aging.genes$GENEID
 aging.genes.sig.matrix <- sig.matrix[sig.matrix$NAME %in% aging.genes,]
 write.table(x = aging.genes.sig.matrix, file = "GSE163943.DEG.aging.genes.POD_vs_CTL.diff_limma.significant.txt", sep = "\t", quote = FALSE, row.names = TRUE, col.names = TRUE)
 
-dat <- aging.genes.sig.matrix[,1:8]
+
+############
+### heatmap
+############
+dat <- aging.genes.sig.matrix
+rownames(dat) <- dat$NAME
+dat <- dat[,1:8]
 
 anno_col <- data.frame(row.names = metasheet$ID, GROUP = metasheet$GROUP)
 rownames(anno_col) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
 anno_col$GROUP <- factor(anno_col$GROUP)
-
-dat <- rbind(head(dat, 10), tail(dat, 10))
-rownames(dat) <- str_extract(string = rownames(dat), pattern = "[|].*[|]")
-rownames(dat) <- gsub(pattern = "[|]", replacement = "", x = rownames(dat))
 
 library(ggplot2)
 library(pheatmap)
