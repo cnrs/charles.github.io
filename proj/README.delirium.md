@@ -246,3 +246,7 @@ h_size <- 6
 ggsave(filename = paste("GSE163943.DEG", "AGING.heatmap.pdf", sep = "."), plot = p, width = w_size, height = h_size, units = "cm")
 ```
 
+7. aging.genes
+```
+executeCircosPlot (covariates = unique(aging.genes.sig.matrix$NAME), output = "DEG.AGING")
+```
