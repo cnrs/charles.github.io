@@ -188,5 +188,7 @@ colnames(aging.genes) <- "GENEID"
 aging.genes <- aging.genes$GENEID
 
 aging.genes.sig.matrix <- sig.matrix[sig.matrix$NAME %in% aging.genes,]
+write.table(x = aging.genes.sig.matrix, file = "GSE163943.DEG.aging.genes.POD_vs_CTL.diff_limma.significant.txt", sep = "\t", quote = FALSE, row.names = TRUE, col.names = TRUE)
+
 ```
 
