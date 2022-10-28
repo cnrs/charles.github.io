@@ -246,7 +246,21 @@ h_size <- 6
 ggsave(filename = paste("GSE163943.DEG", "AGING.heatmap.pdf", sep = "."), plot = p, width = w_size, height = h_size, units = "cm")
 ```
 
-7. aging.genes
+7. GSVA
+```
+
+sed -e 's/[[:space:]]/\t/g' GSE163943.protein_coding.txt > GSE163943.protein_coding.txt.1
+mv GSE163943.protein_coding.txt.1 GSE163943.protein_coding.txt
+
+source("/usr/local/prog/scripts/readmatrixkits.R")
+matrix <- readMatrixFromFile (matrix = "GSE163943.protein_coding.txt")
+colnames(matrix) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
+
+gs.matrix <- enrichmentGSVA (matrix = matrix, method = "gsva", species = "Homo sapiens", ontology = "KEGG", m_s_mnsize = 5, m_x_mxsize = 500, output = "GSE163943")
+
+```
+
+9. aging.genes
 ```
 executeCircosPlot (covariates = unique(aging.genes.sig.matrix$NAME), output = "DEG.AGING")
 ```
