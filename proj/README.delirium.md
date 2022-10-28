@@ -230,7 +230,7 @@ p <- pheatmap(mat = dat,
 #w_size <- ncol(matrix) * 0.25 + 10
 #h_size <- nrow(matrix) * 0.25 + 1
 w_size <- 7
-h_size <- 8
+h_size <- 6
 
 ggsave(filename = paste("GSE163943.DEG", "AGING.heatmap.pdf", sep = "."), plot = p, width = w_size, height = h_size, units = "cm")
 ```
