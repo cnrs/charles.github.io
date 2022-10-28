@@ -9,9 +9,12 @@ library(tidyverse)
 
 ###matrix <- readMatrixFromFile (matrix = "TCGA_COAD.TPM.tab")
 matrix <- read.table(file = "GSE163943.protein_coding.txt", row.names = 1, header = T)
+colnames(matrix) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
+
 metasheet <- read.table(file = "metasheet.txt", row.names = NULL, header = T)
-metasheet <- metasheet[,c("GID", "TYPE")]
+metasheet <- metasheet[,c("SID", "TYPE")]
 colnames(metasheet) <- c("ID", "GROUP")
+rownames(metasheet) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
 
 sig.matrix <- diffIimma (matrix = matrix, metasheet = metasheet, ref = "CTL", exp = "POD", logFC.cutoff = log(1.5, 2), adj.p.cutoff = 1, output = "GSE163943.DEG")
 sig.matrix <- sig.matrix[sig.matrix$P.Value <= 0.05,]
