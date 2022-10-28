@@ -185,6 +185,8 @@ aging.genes
 ```
 aging.genes <- read.table("/home/wangk/lab/yinyibo/aging.gene.txt")
 colnames(aging.genes) <- "GENEID"
+aging.genes <- aging.genes$GENEID
 
+aging.genes.sig.matrix <- sig.matrix[sig.matrix$NAME %in% aging.genes,]
 ```
 
