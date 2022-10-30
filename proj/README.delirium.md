@@ -7,14 +7,13 @@ suppressPackageStartupMessages({
 })
 library(tidyverse)
 
-###matrix <- readMatrixFromFile (matrix = "TCGA_COAD.TPM.tab")
-matrix <- read.table(file = "GSE163943.protein_coding.txt", row.names = 1, header = T)
+matrix <- readMatrixFromFile (matrix = "GSE163943.protein_coding.txt")
 colnames(matrix) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
 
 metasheet <- read.table(file = "metasheet.txt", row.names = NULL, header = T)
 metasheet <- metasheet[,c("SID", "TYPE")]
 colnames(metasheet) <- c("ID", "GROUP")
-rownames(metasheet) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
+rownames(metasheet) <- metasheet$ID
 
 sig.matrix <- diffIimma (matrix = matrix, metasheet = metasheet, ref = "CTL", exp = "POD", logFC.cutoff = log(1.5, 2), adj.p.cutoff = 1, output = "GSE163943.DEG")
 sig.matrix <- sig.matrix[sig.matrix$P.Value <= 0.05,]
@@ -32,13 +31,11 @@ heatmap
 ```
 
 dat <- sig.matrix[,1:8]
-colnames(dat) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
 dat <- data.frame(dat)
 
 library(ggplot2)
 library(pheatmap)
 anno_col <- data.frame(row.names = metasheet$ID, GROUP = metasheet$GROUP)
-rownames(anno_col) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
 anno_col$GROUP <- factor(anno_col$GROUP)
 
 p <- pheatmap(mat = dat,
@@ -85,12 +82,10 @@ sig.matrix <- arrange(sig.matrix, desc(logFC), P.Value)
 
 
 dat <- sig.matrix[,1:8]
-colnames(dat) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
 dat <- data.frame(dat)
 
 
 anno_col <- data.frame(row.names = metasheet$ID, GROUP = metasheet$GROUP)
-rownames(anno_col) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
 anno_col$GROUP <- factor(anno_col$GROUP)
 
 dat <- rbind(head(dat, 10), tail(dat, 10))
@@ -158,19 +153,13 @@ suppressPackageStartupMessages({
 })
 library(tidyverse)
 
-matrix <- read.table(file = "GSE163943.protein_coding.txt", row.names = 1, header = T)
-metasheet <- read.table(file = "metasheet.txt", row.names = NULL, header = T)
-metasheet <- metasheet[,c("GID", "TYPE")]
-colnames(metasheet) <- c("ID", "GROUP")
-rownames(metasheet) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
-metasheet$ID <- rownames(metasheet)
+matrix <- readMatrixFromFile (matrix = "GSE163943.protein_coding.txt")
 
 sig.matrix <- diffIimma (matrix = matrix, metasheet = metasheet, ref = "CTL", exp = "POD", logFC.cutoff = log(1.5, 2), adj.p.cutoff = 1, output = "GSE163943.DEG")
 sig.matrix <- sig.matrix[sig.matrix$P.Value <= 0.05,]
 sig.matrix <- arrange(sig.matrix, desc(logFC), P.Value)
 
 dat <- sig.matrix[,1:8]
-colnames(dat) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
 dat <- data.frame(dat)
 
 dat <- rbind(head(dat, 10), tail(dat, 10))
@@ -210,7 +199,6 @@ rownames(dat) <- dat$NAME
 dat <- dat[,1:8]
 
 anno_col <- data.frame(row.names = metasheet$ID, GROUP = metasheet$GROUP)
-rownames(anno_col) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
 anno_col$GROUP <- factor(anno_col$GROUP)
 
 library(ggplot2)
@@ -255,10 +243,7 @@ source("/usr/local/prog/scripts/readmatrixkits.R")
 matrix <- readMatrixFromFile (matrix = "GSE163943.protein_coding.txt")
 colnames(matrix) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
 
-metasheet <- read.table(file = "metasheet.txt", row.names = NULL, header = T)
-metasheet <- metasheet[,c("SID", "TYPE")]
-colnames(metasheet) <- c("ID", "GROUP")
-rownames(metasheet) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
+matrix <- readMatrixFromFile (matrix = "GSE163943.protein_coding.txt")
 
 gs.matrix <- enrichmentGSVA (matrix = matrix, method = "gsva", species = "Homo sapiens", ontology = "KEGG", m_s_mnsize = 1, m_x_mxsize = 500, output = "GSE163943")
 sig.matrix <- diffIimma (matrix = gs.matrix, metasheet = metasheet, ref = "POD", exp = "CTL", logFC.cutoff = 0.00, adj.p.cutoff = 1, output = "GSE163943.GSVA")
