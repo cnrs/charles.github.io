@@ -254,15 +254,26 @@ colnames(metasheet) <- c("ID", "GROUP")
 rownames(metasheet) <- metasheet$ID
 
 sig.matrix <- diffIimma (matrix = matrix, metasheet = metasheet, ref = "CTL", exp = "POD", logFC.cutoff = log(1.0, 2), adj.p.cutoff = 1, output = "GSE163943.DEG")
-### sig.matrix <- sig.matrix[sig.matrix$P.Value <= 0.05,]
-### sig.matrix <- arrange(sig.matrix, desc(logFC), P.Value)
 
 enrichmentGSEA(matrix = sig.matrix, ontology = "BP", species = "human", pvalue.cutoff = 0.05, output = "GSE163943.ALLGENE", w_size = 7, h_size = 7)
 enrichmentGSEA(matrix = sig.matrix, ontology = "KEGG", species = "human", pvalue.cutoff = 0.05, output = "GSE163943.ALLGENE", w_size = 7, h_size = 7)
 
-gs.matrix <- enrichmentGSVA (matrix = matrix, method = "gsva", species = "Homo sapiens", ontology = "KEGG", m_s_mnsize = 1, m_x_mxsize = 500, output = "GSE163943")
-sig.matrix <- diffIimma (matrix = gs.matrix, metasheet = metasheet, ref = "POD", exp = "CTL", logFC.cutoff = 0.00, adj.p.cutoff = 1, output = "GSE163943.GSVA")
-plotHistogramForGSVA (matrix = sig.matrix, output = "GSE163943.GSVA", logFC.cutoff = 0.00, pvalue.cutoff = 0.05, ns = T)
+gs.matrix <- enrichmentGSVA (matrix = matrix[,1:8], method = "gsva", species = "Homo sapiens", ontology = "KEGG", m_s_mnsize = 1, m_x_mxsize = 500, output = "GSE163943.ALLGENE")
+sig.matrix <- diffIimma (matrix = gs.matrix, metasheet = metasheet, ref = "CTL", exp = "POD", logFC.cutoff = 0.00, adj.p.cutoff = 1, output = "GSE163943.ALLGENE.GSVA")
+plotHistogramForGSVA (matrix = sig.matrix, output = "GSE163943.ALLGENE.GSVA", logFC.cutoff = 0.00, pvalue.cutoff = 0.05, ns = T)
+
+
+
+sig.matrix <- diffIimma (matrix = matrix, metasheet = metasheet, ref = "CTL", exp = "POD", logFC.cutoff = log(1.0, 2), adj.p.cutoff = 1, output = "GSE163943.DEG")
+sig.matrix <- sig.matrix[abs(sig.matrix$logFC) >= log(1.5, 2) & sig.matrix$P.Value <= 0.05,]
+sig.matrix <- arrange(sig.matrix, desc(logFC), P.Value)
+
+enrichmentGSEA(matrix = sig.matrix, ontology = "BP", species = "human", pvalue.cutoff = 0.05, output = "GSE163943.DEG", w_size = 7, h_size = 7)
+enrichmentGSEA(matrix = sig.matrix, ontology = "KEGG", species = "human", pvalue.cutoff = 0.05, output = "GSE163943.DEG", w_size = 7, h_size = 7)
+
+gs.matrix <- enrichmentGSVA (matrix = matrix[rownames(sig.matrix), 1:8], method = "gsva", species = "Homo sapiens", ontology = "KEGG", m_s_mnsize = 1, m_x_mxsize = 500, output = "GSE163943.DEG")
+sig.matrix <- diffIimma (matrix = gs.matrix, metasheet = metasheet, ref = "CTL", exp = "POD", logFC.cutoff = 0.00, adj.p.cutoff = 1, output = "GSE163943.DEG.GSVA")
+plotHistogramForGSVA (matrix = sig.matrix, output = "GSE163943.DEG.GSVA", logFC.cutoff = 0.00, pvalue.cutoff = 0.05, ns = T)
 
 ```
 
