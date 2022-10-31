@@ -234,16 +234,30 @@ h_size <- 6
 ggsave(filename = paste("GSE163943.DEG", "AGING.heatmap.pdf", sep = "."), plot = p, width = w_size, height = h_size, units = "cm")
 ```
 
-7. GSVA
+7. GSEA & GSVA
 ```
 sed -e 's/[[:space:]]/\t/g' GSE163943.protein_coding.txt > GSE163943.protein_coding.txt.1
 mv GSE163943.protein_coding.txt.1 GSE163943.protein_coding.txt
 
-source("/usr/local/prog/scripts/readmatrixkits.R")
+suppressPackageStartupMessages({
+	source("/usr/local/prog/scripts/plotThemes.R")
+	source("/usr/local/prog/scripts/readmatrixkits.R")
+	source("/usr/local/prog/scripts/enrichmentkits.R")
+})
+
 matrix <- readMatrixFromFile (matrix = "GSE163943.protein_coding.txt")
 colnames(matrix) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
 
-matrix <- readMatrixFromFile (matrix = "GSE163943.protein_coding.txt")
+metasheet <- read.table(file = "metasheet.txt", row.names = NULL, header = T)
+metasheet <- metasheet[,c("SID", "TYPE")]
+colnames(metasheet) <- c("ID", "GROUP")
+rownames(metasheet) <- metasheet$ID
+
+sig.matrix <- diffIimma (matrix = matrix, metasheet = metasheet, ref = "CTL", exp = "POD", logFC.cutoff = log(1.0, 2), adj.p.cutoff = 1, output = "GSE163943.DEG")
+### sig.matrix <- sig.matrix[sig.matrix$P.Value <= 0.05,]
+### sig.matrix <- arrange(sig.matrix, desc(logFC), P.Value)
+
+enrichmentGSEA(matrix = sig.matrix, ontology = "BP", species = "human", pvalue.cutoff = 0.05, output = "GSE163943.DEG", w_size = 7, h_size = 7)
 
 gs.matrix <- enrichmentGSVA (matrix = matrix, method = "gsva", species = "Homo sapiens", ontology = "KEGG", m_s_mnsize = 1, m_x_mxsize = 500, output = "GSE163943")
 sig.matrix <- diffIimma (matrix = gs.matrix, metasheet = metasheet, ref = "POD", exp = "CTL", logFC.cutoff = 0.00, adj.p.cutoff = 1, output = "GSE163943.GSVA")
