@@ -301,5 +301,5 @@ aging.degs = c("ADCY5", "AKT1", "APP", "BCL6", "COL4A2", "E2F1", "HOXB7", "IGF1"
 matrix <- mergeMatrixMetasheet (matrix = matrix, metasheet = metasheet)
 
 matrix$GROUP <- ifelse(matrix$GROUP == "POD", 1, 0)
-executeLASSOAnalysis(matrix, phenotype = "GROUP", covariates = aging.degs, model = "cox", measure = "default", output = "OUT", w_size = 6.5, h_szie = 8)
+executeLASSOAnalysis(matrix = matrix, phenotype = "GROUP", covariates = aging.degs, model = "binomial", measure = "default", output = "GSE163943.AGING.DEG", w_size = 6.5, h_szie = 8)
 ```
