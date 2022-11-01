@@ -281,3 +281,25 @@ plotHistogramForGSVA (matrix = sig.matrix, output = "GSE163943.DEG.GSVA", logFC.
 ```
 executeCircosPlot (covariates = unique(aging.genes.sig.matrix$NAME), output = "DEG.AGING")
 ```
+
+
+10. LASSO鉴定关键衰老基因
+```
+matrix <- readMatrixFromFile (matrix = "GSE163943.protein_coding.txt")
+colnames(matrix) <- c("Blood_CTL_R1", "Blood_CTL_R2", "Blood_CTL_R3", "Blood_CTL_R4", "Blood_POD_R1", "Blood_POD_R2", "Blood_POD_R3", "Blood_POD_R4")
+
+metasheet <- read.table(file = "metasheet.txt", row.names = NULL, header = T)
+metasheet <- metasheet[,c("SID", "TYPE")]
+colnames(metasheet) <- c("ID", "GROUP")
+rownames(metasheet) <- metasheet$ID
+
+### sig.matrix <- diffIimma (matrix = matrix, metasheet = metasheet, ref = "CTL", exp = "POD", logFC.cutoff = log(1.0, 2), adj.p.cutoff = 1, output = "GSE163943.DEG")
+### sig.matrix <- sig.matrix[abs(sig.matrix$logFC) >= log(1.5, 2) & sig.matrix$P.Value <= 0.05,]
+### sig.matrix <- arrange(sig.matrix, desc(logFC), P.Value)
+
+aging.degs = c("ADCY5", "AKT1", "APP", "BCL6", "COL4A2", "E2F1", "HOXB7", "IGF1", "IL6", "KRT14", "NFE2L2", "RGN", "SERPINF1", "TBX2")
+matrix <- mergeMatrixMetasheet (matrix = matrix, metasheet = metasheet)
+
+matrix$GROUP <- ifelse(matrix$GROUP == "POD", 1, 0)
+executeLASSOAnalysis(matrix, phenotype = "GROUP", covariates = aging.degs, model = "cox", measure = "default", output = "OUT", w_size = 6.5, h_szie = 8)
+```
