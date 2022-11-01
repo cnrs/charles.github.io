@@ -303,3 +303,11 @@ matrix <- mergeMatrixMetasheet (matrix = matrix, metasheet = metasheet)
 matrix$GROUP <- ifelse(matrix$GROUP == "POD", 1, 0)
 executeLASSOAnalysis(matrix = matrix, phenotype = "GROUP", covariates = aging.degs, model = "binomial", measure = "default", output = "GSE163943.AGING.DEG", w_size = 6.5, h_szie = 8)
 ```
+
+预测到2个关键基因（GSE163943.AGING.DEG.LASSO.coefficient.txt）：
+```
+ID	coefficient
+COL4A2	0.328030958447826
+NFE2L2	3.49659258777546
+```
+
