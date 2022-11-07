@@ -19,6 +19,11 @@ sig.matrix <- diffIimma (matrix = matrix, metasheet = metasheet, ref = "CTL", ex
 sig.matrix <- sig.matrix[sig.matrix$P.Value <= 0.05,]
 sig.matrix <- arrange(sig.matrix, desc(logFC), P.Value)
 
+
+saveRDS(object = matrix, file = "GSE163943.matrix.rds")
+saveRDS(object = metasheet, file = "GSE163943.metasheet.rds")
+saveRDS(object = sig.matrix, file = "GSE163943.sig.matrix.rds")
+
 library(tidyverse)
 library(tidyr)
 sig.matrix$NAME <- str_extract(rownames(sig.matrix), "[|].*[|]")
