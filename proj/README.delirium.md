@@ -326,12 +326,10 @@ matrix <- executeWGCNADataCleaning (matrix = matrix)
 vector = c(seq(from = 1, to = 40, by = 2))
 sft <- executeWGCNATopologyAnalysis(matrix = matrix, rsquared.cutoff = 0.80, type = "signed", output = "GSE163943.STEP2", w_size = 10, h_size = 5)
 ### GSE163943.STEP2.WGCNA.network_topology.beta.value.pdf
+### sft$powerEstimate = 23
 
 net <- executeWGCNANetworkAnalysis (matrix = matrix, sft = sft, type = "signed")
 
-sft <- executeWGCNATopologyAnalysis(matrix = matrix, rsquared.cutoff = 0.80, type = "signed", output = "GSE163943.STEP2", w_size = 10, h_size = 5)
-### sft$powerEstimate = 29
-### GSE163943.STEP2.WGCNA.network_topology.beta.value.pdf
 
 
 
