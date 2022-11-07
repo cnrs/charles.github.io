@@ -363,5 +363,10 @@ executeWGCNAModuleInterested (matrix = matrix, datTraits = datTraits, traits = "
 
 
 
+executeWGCNATOMVisual(matrix = matrix, type = "signed", datTraits = datTraits, traits = c("aging.genes.up", "aging.genes.dn"), network = net, output = "GSE163943.STEP7", w_size = 8, h_size = 8)
+
+
+
+
 
 ```
