@@ -323,4 +323,8 @@ matrix <- t(matrix)
 
 sft$powerEstimate = 31
 
+sft <- executeWGCNATopologyAnalysis(matrix = matrix, rsquared.cutoff = 0.85, type = "signed", output = "GSE163943.STEP2", w_size = 10, h_size = 5)
+### GSE163943.STEP2.WGCNA.network_topology.beta.value.pdf
+
+
 ```
