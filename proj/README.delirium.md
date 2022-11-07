@@ -318,8 +318,16 @@ NFE2L2	3.49659258777546
 
 11， WGCNA
 ```
-matrix <- sig.matrix[,1:8]
-matrix <- t(matrix)
+
+matrix <- executeWGCNADataCleaning (matrix = matrix)
+> dim(matrix)
+[1]    8 2361
+
+sft <- executeWGCNATopologyAnalysis(matrix = matrix, rsquared.cutoff = 0.80, type = "signed", output = "GSE163943.STEP2", w_size = 10, h_size = 5)
+### GSE163943.STEP2.WGCNA.network_topology.beta.value.pdf
+
+net <- executeWGCNANetworkAnalysis (matrix = matrix, sft = sft, type = "signed")
+
 
 sft <- executeWGCNATopologyAnalysis(matrix = matrix, rsquared.cutoff = 0.80, type = "signed", output = "GSE163943.STEP2", w_size = 10, h_size = 5)
 ### sft$powerEstimate = 29
