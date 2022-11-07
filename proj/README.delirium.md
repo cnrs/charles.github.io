@@ -321,4 +321,6 @@ NFE2L2	3.49659258777546
 matrix <- sig.matrix[,1:8]
 matrix <- t(matrix)
 
+sft$powerEstimate = 31
+
 ```
