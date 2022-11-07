@@ -360,13 +360,12 @@ executeWGCNAModuleInterested (matrix = matrix, datTraits = datTraits, traits = "
 executeWGCNAModuleInterested (matrix = matrix, datTraits = datTraits, traits = "aging.genes.dn", module = "brown", network = net, output = "GSE163943.STEP6", w_size = 6, h_size = 4.5)
 executeWGCNAModuleInterested (matrix = matrix, datTraits = datTraits, traits = "aging.genes.dn", module = "blue", network = net, output = "GSE163943.STEP6", w_size = 6, h_size = 4.5)
 
-
-
-
 executeWGCNATOMVisual(matrix = matrix, type = "signed", datTraits = datTraits, traits = c("aging.genes.up", "aging.genes.dn"), network = net, output = "GSE163943.STEP7", w_size = 8, h_size = 8)
 
+executeWGCNAModuleGeneInterested(matrix = matrix, datTraits = datTraits, module = "blue", network = net, output = "GSE163943.STEP8", w_size = 8, h_size = 8)
+executeWGCNAModuleGeneInterested(matrix = matrix, datTraits = datTraits, module = "brown", network = net, output = "GSE163943.STEP8", w_size = 8, h_size = 8)
 
-
+cytoscape <- executeWGCNANetworkToCytoscape(matrix = matrix, type = "signed", module = "brown", network = net, output = "STEP9")
 
 
 ```
