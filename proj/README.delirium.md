@@ -316,3 +316,9 @@ COL4A2	0.328030958447826
 NFE2L2	3.49659258777546
 ```
 
+11， WGCNA
+```
+matrix <- sig.matrix[,1:8]
+matrix <- t(matrix)
+
+```
