@@ -343,7 +343,7 @@ aging.genes.dn <- c("SERPINF1", "APP", "AKT1", "ADCY5", "E2F1", "TBX2", "KRT14")
 datTraits <- metasheet
 datTraits$aging.genes.up <- rowMeans(dat[,aging.genes.up])
 datTraits$aging.genes.dn <- rowMeans(dat[,aging.genes.dn])
-
+datTraits <- datTraits[,c("aging.genes.up", "aging.genes.dn")]
 datTraits <- datTraits[match(rownames(matrix), rownames(datTraits)),]
 
 
