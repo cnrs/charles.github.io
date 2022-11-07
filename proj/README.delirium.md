@@ -329,7 +329,22 @@ sft <- executeWGCNATopologyAnalysis(matrix = matrix, rsquared.cutoff = 0.80, typ
 ### sft$powerEstimate = 23
 
 net <- executeWGCNANetworkAnalysis (matrix = matrix, sft = sft, type = "signed")
+executeWGCNAModuleVisual(network = net, output = "GSE163943.STEP4", w_size = 9, h_size = 6)
 
+### 表型
+dat <- readRDS("GSE163943.matrix.rds")
+dat <- t(dat)
+
+aging.genes <- c("HOXB7", "RGN", "IGF1", "NFE2L2", "COL4A2", "IL6", "BCL6", "SERPINF1", "APP", "AKT1", "ADCY5", "E2F1", "TBX2", "KRT14")
+aging.genes.up <- c("HOXB7", "RGN", "IGF1", "NFE2L2", "COL4A2", "IL6", "BCL6")
+aging.genes.dn <- c("SERPINF1", "APP", "AKT1", "ADCY5", "E2F1", "TBX2", "KRT14")
+
+### aging.genes <- intersect(aging.genes, colnames(dat))
+datTraits <- metasheet
+datTraits$aging.genes.up <- rowMeans(dat[,aging.genes.up])
+datTraits$aging.genes.dn <- rowMeans(dat[,aging.genes.dn])
+
+datTraits <- datTraits[match(rownames(matrix), rownames(datTraits)),]
 
 
 
