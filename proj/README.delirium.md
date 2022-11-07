@@ -350,5 +350,12 @@ datTraits <- datTraits[match(rownames(matrix), rownames(datTraits)),]
 executeWGCNAModuleSignificance (matrix = matrix, datTraits = datTraits, network = net, output = "GSE163943.STEP5", w_size = 10, h_size = 4.5)
 
 
+### up: module = "blue"
+### dn: module = "brown"
+
+executeWGCNAModuleInterested (matrix = matrix, datTraits = datTraits, traits = "aging.genes.up", module = "blue", network = net, output = "GSE163943.STEP6", w_size = 6, h_size = 4.5)
+executeWGCNAModuleInterested (matrix = matrix, datTraits = datTraits, traits = "aging.genes.dn", module = "brown", network = net, output = "GSE163943.STEP6", w_size = 6, h_size = 4.5)
+
+
 
 ```
