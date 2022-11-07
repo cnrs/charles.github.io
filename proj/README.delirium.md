@@ -318,7 +318,7 @@ NFE2L2	3.49659258777546
 
 11， WGCNA
 ```
-
+matrix <- readRDS("GSE163943.matrix.rds")
 matrix <- executeWGCNADataCleaning (matrix = matrix)
 > dim(matrix)
 [1]    8 2361
