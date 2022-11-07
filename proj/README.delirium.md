@@ -347,5 +347,8 @@ datTraits <- datTraits[,c("aging.genes.up", "aging.genes.dn")]
 datTraits <- datTraits[match(rownames(matrix), rownames(datTraits)),]
 
 
+executeWGCNAModuleSignificance (matrix = matrix, datTraits = datTraits, network = net, output = "GSE163943.STEP5", w_size = 10, h_size = 4.5)
+
+
 
 ```
