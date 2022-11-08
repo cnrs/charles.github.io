@@ -379,4 +379,5 @@ sig.degs <- sig.degs$NAME
 
 write.table(x = sig.degs, file = "sig.degs.txt", sep = "\t", quote = F, row.names = FALSE, col.names = FALSE)
 
+perl ext_screened_ppi.pl sig.degs.txt GSE163943.STEP9.blue.cytoscape.edge.ppi > GSE163943.STEP9.blue.cytoscape.edge.ppi.txt
 ```
