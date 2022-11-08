@@ -374,12 +374,9 @@ cytoscape <- executeWGCNANetworkToCytoscape(matrix = matrix, type = "signed", mo
 ```
 perl ext_existing_ppi.pl BIOGRID_INTACT_STRING.HUMAN.txt GSE163943.STEP9.blue.cytoscape.edge.txt > GSE163943.STEP9.blue.cytoscape.edge.ppi
 
-network <- net
-module = "blue"
-module.colors <- data.frame(row.names = names(network$colors), ID = names(network$colors), colors = labels2colors(network$colors))
-module.colors <- module.colors[match(colnames(matrix), module.colors$ID),]
-module.genes <- module.colors[module.colors$colors == module, "ID"]
+sig.degs <- read.table(file = "GSE163943.DEG.POD_vs_CTL.diff_limma.significant.txt", header = TRUE, sep = "\t")
+sig.degs <- sig.degs$NAME
 
-write.table(x = module.genes, file = paste(output, module, "genes.txt", sep = "."), append = TRUE, sep = "\t", quote = F, row.names = TRUE, col.names = FALSE)
+write.table(x = sig.degs, file = "sig.degs.txt", sep = "\t", quote = F, row.names = FALSE, col.names = FALSE)
 
 ```
