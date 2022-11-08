@@ -369,3 +369,9 @@ cytoscape <- executeWGCNANetworkToCytoscape(matrix = matrix, type = "signed", mo
 
 
 ```
+
+12. PPI
+```
+perl ext_existing_ppi.pl BIOGRID_INTACT_STRING.HUMAN.txt GSE163943.STEP9.blue.cytoscape.edge.txt > GSE163943.STEP9.blue.cytoscape.edge.ppi
+
+```
