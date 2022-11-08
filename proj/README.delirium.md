@@ -372,6 +372,9 @@ cytoscape <- executeWGCNANetworkToCytoscape(matrix = matrix, type = "signed", mo
 
 12. PPI
 ```
+aging.genes.up <- c("HOXB7", "RGN", "IGF1", "NFE2L2", "COL4A2", "IL6", "BCL6")
+aging.genes.dn <- c("SERPINF1", "APP", "AKT1", "ADCY5", "E2F1", "TBX2", "KRT14")
+
 perl ext_existing_ppi.pl BIOGRID_INTACT_STRING.HUMAN.txt GSE163943.STEP9.blue.cytoscape.edge.txt > GSE163943.STEP9.blue.cytoscape.edge.ppi
 
 sig.degs <- read.table(file = "GSE163943.DEG.POD_vs_CTL.diff_limma.significant.txt", header = TRUE, sep = "\t")
