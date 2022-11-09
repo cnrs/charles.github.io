@@ -376,14 +376,14 @@ aging.genes.up <- c("HOXB7", "RGN", "IGF1", "NFE2L2", "COL4A2", "IL6", "BCL6")
 aging.genes.dn <- c("SERPINF1", "APP", "AKT1", "ADCY5", "E2F1", "TBX2", "KRT14")
 
 perl ext_existing_ppi.pl  aging.degs.txt BIOGRID_INTACT_STRING.HUMAN.txt > aging.degs.ppi
+```
 
+
+13. module GO, kEGG
+```
 sig.degs <- read.table(file = "GSE163943.DEG.POD_vs_CTL.diff_limma.significant.txt", header = TRUE, sep = "\t")
 sig.degs <- sig.degs$NAME
 write.table(x = sig.degs, file = "sig.degs.txt", sep = "\t", quote = F, row.names = FALSE, col.names = FALSE)
 
-perl ext_existing_ppi.pl BIOGRID_INTACT_STRING.HUMAN.txt GSE163943.STEP9.blue.cytoscape.edge.txt > GSE163943.STEP9.blue.cytoscape.edge.ppi
-perl ext_screened_ppi.pl sig.degs.txt GSE163943.STEP9.blue.cytoscape.edge.ppi > GSE163943.STEP9.blue.cytoscape.edge.ppi.txt
 
-perl ext_existing_ppi.pl BIOGRID_INTACT_STRING.HUMAN.txt GSE163943.STEP9.brown.cytoscape.edge.txt > GSE163943.STEP9.brown.cytoscape.edge.ppi
-perl ext_screened_ppi.pl sig.degs.txt GSE163943.STEP9.brown.cytoscape.edge.ppi > GSE163943.STEP9.brown.cytoscape.edge.ppi.txt
 ```
