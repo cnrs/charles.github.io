@@ -396,6 +396,8 @@ vector = c(seq(from = 1, to = 40, by = 2))
 sft <- executeWGCNATopologyAnalysis(matrix = matrix, rsquared.cutoff = 0.80, type = "signed", output = "GSE163943.STEP2", w_size = 10, h_size = 5)
 net <- executeWGCNANetworkAnalysis (matrix = matrix, sft = sft, type = "signed")
 
+source("/usr/local/prog/scripts/enrichmentGeneSet.R")
+
 module = "blue"
 network <- net
 module.colors <- data.frame(row.names = names(network$colors), ID = names(network$colors), colors = labels2colors(network$colors))
