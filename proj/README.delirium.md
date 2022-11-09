@@ -402,8 +402,7 @@ module.colors <- data.frame(row.names = names(network$colors), ID = names(networ
 module.colors <- module.colors[match(colnames(matrix), module.colors$ID),]
 module.genes <- module.colors[module.colors$colors == module, "ID"]
 module.genes <- intersect(module.genes, rownames((sig.matrix)))
-write.table(x = sig.degs, file = "sig.degs.blue.txt", sep = "\t", quote = F, row.names = FALSE, col.names = FALSE)
-
+write.table(x = module.genes, file = "sig.degs.blue.txt", sep = "\t", quote = F, row.names = FALSE, col.names = FALSE)
 
 enrichmentGeneSet(geneset = module.genes, ontology = "BP", species = "human", output = "AGING.DEG.BP.blue")
 enrichmentGeneSet(geneset = module.genes, ontology = "MF", species = "human", output = "AGING.DEG.MF.blue")
@@ -417,8 +416,7 @@ module.colors <- data.frame(row.names = names(network$colors), ID = names(networ
 module.colors <- module.colors[match(colnames(matrix), module.colors$ID),]
 module.genes <- module.colors[module.colors$colors == module, "ID"]
 module.genes <- intersect(module.genes, rownames((sig.matrix)))
-write.table(x = sig.degs, file = "sig.degs.brown.txt", sep = "\t", quote = F, row.names = FALSE, col.names = FALSE)
-
+write.table(x = module.genes, file = "sig.degs.brown.txt", sep = "\t", quote = F, row.names = FALSE, col.names = FALSE)
 
 enrichmentGeneSet(geneset = module.genes, ontology = "BP", species = "human", output = "AGING.DEG.BP.brown")
 enrichmentGeneSet(geneset = module.genes, ontology = "MF", species = "human", output = "AGING.DEG.MF.brown")
