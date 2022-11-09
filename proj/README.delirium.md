@@ -386,4 +386,42 @@ sig.degs <- sig.degs$NAME
 write.table(x = sig.degs, file = "sig.degs.txt", sep = "\t", quote = F, row.names = FALSE, col.names = FALSE)
 
 
+
+matrix <- readRDS(file = "GSE163943.matrix.rds")
+metasheet <- readRDS(file = "GSE163943.metasheet.rds")
+sig.matrix <- readRDS(file = "GSE163943.sig.matrix.rds")
+
+matrix <- executeWGCNADataCleaning (matrix = matrix)
+vector = c(seq(from = 1, to = 40, by = 2))
+sft <- executeWGCNATopologyAnalysis(matrix = matrix, rsquared.cutoff = 0.80, type = "signed", output = "GSE163943.STEP2", w_size = 10, h_size = 5)
+net <- executeWGCNANetworkAnalysis (matrix = matrix, sft = sft, type = "signed")
+
+module = "blue"
+network <- net
+module.colors <- data.frame(row.names = names(network$colors), ID = names(network$colors), colors = labels2colors(network$colors))
+module.colors <- module.colors[match(colnames(matrix), module.colors$ID),]
+module.genes <- module.colors[module.colors$colors == module, "ID"]
+module.genes <- intersect(module.genes, rownames((sig.matrix)))
+write.table(x = sig.degs, file = "sig.degs.blue.txt", sep = "\t", quote = F, row.names = FALSE, col.names = FALSE)
+
+
+enrichmentGeneSet(geneset = module.genes, ontology = "BP", species = "human", output = "AGING.DEG.BP.blue")
+enrichmentGeneSet(geneset = module.genes, ontology = "MF", species = "human", output = "AGING.DEG.MF.blue")
+enrichmentGeneSet(geneset = module.genes, ontology = "CC", species = "human", output = "AGING.DEG.CC.blue")
+enrichmentGeneSet(geneset = module.genes, ontology = "KEGG", species = "human", output = "AGING.DEG.KEGG.blue")
+
+
+module = "brown"
+network <- net
+module.colors <- data.frame(row.names = names(network$colors), ID = names(network$colors), colors = labels2colors(network$colors))
+module.colors <- module.colors[match(colnames(matrix), module.colors$ID),]
+module.genes <- module.colors[module.colors$colors == module, "ID"]
+module.genes <- intersect(module.genes, rownames((sig.matrix)))
+write.table(x = sig.degs, file = "sig.degs.brown.txt", sep = "\t", quote = F, row.names = FALSE, col.names = FALSE)
+
+
+enrichmentGeneSet(geneset = module.genes, ontology = "BP", species = "human", output = "AGING.DEG.BP.brown")
+enrichmentGeneSet(geneset = module.genes, ontology = "MF", species = "human", output = "AGING.DEG.MF.brown")
+enrichmentGeneSet(geneset = module.genes, ontology = "CC", species = "human", output = "AGING.DEG.CC.brown")
+enrichmentGeneSet(geneset = module.genes, ontology = "KEGG", species = "human", output = "AGING.DEG.KEGG.brown")
 ```
