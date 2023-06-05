@@ -1,3 +1,7 @@
+https://orcid.org/0000-0002-6194-0480
+
+
+
 Table 1. Caner types used in thgis study.			
 ```
 序号	TCGA Project.ID	Name	中文名称	Total sample number	Normal sample number
